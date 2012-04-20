@@ -1,7 +1,8 @@
-
+#!/usr/bin/env python
 import ROOT as r
-import sys, os
-
+import os, commands, sys
+import argparse
+import errno
 def ensure_dir(path):
     try:
       os.makedirs(path)
@@ -11,28 +12,30 @@ def ensure_dir(path):
       else: raise
 
 
-print " Use Is python subber.py Analysis InPutFileList OutPutDir Trigger" 
-# inpu = file("./dec22List.txt","r")
-# inpu = file("./incompList.txt","r")
-# inpu = file("./HTDataSet.txt","r")
-# inpu = file("./Pf.txt","r")
-# inpu = file("./newList.txt","r")
-# inpu = file("./muList.txt","r")
-# inpu = file("./Un.txt","r")
-# inpu = file("./Dn.txt","r")
-inpu = sys.argv[2]
-flist = file(inpu).readlines()
-print flist
-print "Will submit", len(flist) , "jobs"
-
-for i in range(0,len(flist)):
-  os.system("qsub -q hepshort.q subScript.sh " + sys.argv[1] +" "+sys.argv[2] +" " + sys.argv[3] + " " + " "+ sys.argv[4] + " " + str(i))
 
 
-#Now make an output text file containing the parameters that the job was submitted with
-ensure_dir(sys.argv[3])
+def main():
+  """docstring for main"""
+  parser = argparse.ArgumentParser(description="Run the L1 analysis on the batch queue.")
+  parser.add_argument("--input",type = str,dest='inputFile')
+  parser.add_argument("--output",type=str,default="./",dest='outputDir')
+  parser.add_argument("--trigger",type=str,default="HLT_IsoMu*",dest='Trigger')
+  parser.add_argument("--queue",type=str,default = "hepshort.q",dest='queue')
+  parser.add_argument("--analysis",type=str,default="L1JetAnalysis",dest='analysis')
+  args = parser.parse_args()
 
-log = open(sys.argv[3]+"/Log.txt",'w')
-text =  sys.argv[1] +" "+sys.argv[2] +" " + sys.argv[3] + " " + " "+ sys.argv[4] + "\n"
-log.write(text)
+  flist = file(args.inputFile).readlines()
+  print flist
+  print "Will submit", len(flist) , "jobs"
+  ensure_dir("./%s/"%args.outputDir)
+  text = "%s subScript.sh %s %s %s %s"%(args.queue,args.analysis,args.inputFile,args.outputDir,args.Trigger)
+  log = open("./%s/Log.txt"%args.outputDir,'w')
+  log.write(text)
+  for i in range(0,len(flist)):
+    os.system("qsub -q %s subScript.sh %s %s %s %s %s"%(args.queue,args.analysis,args.inputFile,args.outputDir,args.Trigger,i))
+
+
+
+if __name__ == '__main__':
+  main()
 
