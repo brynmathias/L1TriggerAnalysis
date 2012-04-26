@@ -10,3 +10,7 @@
 *.lai
 *.la
 *.a
+#Analysis things
+*.root
+*.pdf
+

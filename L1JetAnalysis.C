@@ -251,21 +251,13 @@ void L1JetAnalysis::BookHistos() {
 
         if( flyHT > 0.){
 
-      // std::cout << " N Cen Jets " << l1extra_->cenJetEt.size() + l1extra_->tauJetEt.size() << " N Reco Jets " << NReco << " Compared to l1HT " << l1extra_->ht << " Fly HT = " << flyHT << std::endl;
           NCenJets->Fill(l1extra_->cenJetEt.size(),wgt);
           RecoHT->Fill( flyHT ,wgt);
-
-
-          if( SecondJetPt(100.*(275./375.)) ){ RefHT225->Fill(ht225Bin,wgt); }
-          if( SecondJetPt(100.*(275./375.)) /*&& HLT_HT > 250.*/ && (NL1Jets_Threshold(2,56.) || l1extra_->ht > 150.) ){ PassHT225->Fill(ht225Bin,wgt);}
 
           if( l1extra_->ht > 50.){  RecoHTL150 ->Fill( flyHT ,wgt); }
           if( l1extra_->ht > 75. ){ RecoHTL175 ->Fill( flyHT, wgt); }
           if( l1extra_->ht > 100.){ RecoHTL1100->Fill( flyHT ,wgt); }
-
-          if( l1extra_->ht > 125.){ 
-            RecoHTL1125->Fill( flyHT ,wgt);
-          }
+          if( l1extra_->ht > 125.){ RecoHTL1125->Fill( flyHT ,wgt);}
           if( l1extra_->ht > 150.){ RecoHTL1150->Fill( flyHT ,wgt); }
           if( l1extra_->ht > 175.){ RecoHTL1175->Fill( flyHT ,wgt); }
           
@@ -301,13 +293,6 @@ void L1JetAnalysis::BookHistos() {
         L1HtRecoJetCorrelation->Fill(flyHT,l1extra_->ht,wgt);
         L1SumEt->Fill(l1extra_->et,wgt);
         L1SumEtCorrelation->Fill(recoMet_->sumEt,l1extra_->et,wgt);
-        // l1extraSumEtGCTCorrelation->Fill(gct_->EtTot,l1extra_->et,wgt);
-
-
-
-
-
-
 
       // Selection for the turn on curves
       // Note as corrected jets are no longer listed in pt order we now have to find the leading jet
@@ -322,7 +307,7 @@ void L1JetAnalysis::BookHistos() {
 
 
       //  Require only jets Matched to a L1 Jet
-        // if ( !MatchJet(leadJet) ) continue; // only select events with a Matched jet, good for resolution stides but not eff
+        if ( !MatchJet(leadJet) ) continue; // only select events with a Matched jet, good for resolution stides but not eff
       //  NB a bit of a hack to read out the correct value from the ReturnMatchedQuantity function -- Didnt know about Enums at the time, will re-write when there is time
         std::pair <int,int> MatchedJet = ReturnMatchedJet(leadJet); // Try to match a L1 Jet to the zeroth reco Jet, return the l1 type and l1 index of
         if(ReturnMatchedQuantity(MatchedJet,Et) > 250. ) continue;
@@ -357,13 +342,6 @@ void L1JetAnalysis::BookHistos() {
           L1EtaPhiMap->Fill(ReturnMatchedQuantity(MatchedJet,Eta),ReturnMatchedQuantity(MatchedJet,Phi),wgt);
           l1JetEn->Fill(ReturnMatchedQuantity(MatchedJet,Et),wgt);
           RefJets->Fill(recoJet_->etCorr[leadJet],wgt); // Denominator for turn on curves
-
-
-
-
-
-
-
 
 
 
@@ -444,22 +422,7 @@ void L1JetAnalysis::BookHistos() {
           if( ReturnMatchedQuantity(MatchedJet,Et) > 150.){
             ET150->Fill(recoJet_->etCorr[leadJet],wgt);
           } // now goes to SingleJet36
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+          
         }
 
     //Make a plot of the 0th L1 Jet energy
@@ -549,13 +512,5 @@ void L1JetAnalysis::BookHistos() {
     // Write and close the file!
       theFile->Write();
       theFile->Close();
-
-
-
-
-
-
-
-
 
     }
