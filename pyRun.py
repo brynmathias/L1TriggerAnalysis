@@ -17,9 +17,9 @@ fi = f.strip()
 print "file" , [f][0:-1] , "outdir" , str(outDir)+"/"+str(fi).rpartition("/")[2] 
 
 print Analysis , inpu, outFile,Trigger, idx
-r.gROOT.ProcessLine(".L "+str(Analysis+"+"))
+r.gROOT.ProcessLine(".L "+str(Analysis+".C+"))
 if Analysis == "L1EnergySumAnalysis": m = r.L1EnergySumAnalysis()
-if Analysis == "L1JetAnalysis.C" : m = r.L1JetAnalysis()
+if Analysis == "L1JetAnalysis" : m = r.L1JetAnalysis()
 m.Open(f[0:-1])
 m.run(-1,str(outDir)+"/"+str(fi).rpartition("/")[2], Trigger)
 #m.run(910000,str(outFile),bool(useUnCor))
