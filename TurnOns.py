@@ -26,6 +26,17 @@ def main():
   c1.open()
   for key,triggerL in turnOns.iteritems():
     turnOnList = []
+    names = []
+    xAxisTitle = ""
+    if "MET" in key: 
+      xAxisTitle = "#slash{E}_{T} (GeV)"
+      names = ["L1MET 30","L1MET 50","L1MET 70"]
+    if "RecoHT" in key: 
+      xAxisTitle = "H_{T} (GeV)"
+      names = ["L1HTT 50","L1HTT 75","L1HTT 100", "L1HTT 150"]
+    if "Jet" in key: 
+      xAxisTitle = "E_{T} (GeV)"
+      names = ["L1 SingleJet 16","L1 SingleJet 36","L1 SingleJet 52","L1 SingleJet 92"]
     c1.canvas.SetLogy(False)
     f = r.TFile.Open(fname)
     if "NoRatio" not in key:
@@ -52,11 +63,11 @@ def main():
       for g in turnOnList:
         mg.Add(g)
       leg = Legend(x1= 0.5, y1=0.25, x2 = 0.8, y2 = 0.8)
-      for g,name in zip(turnOnList,triggerL):
+      for g,name in zip(turnOnList,names):
         leg.AddEntry(g,name,"pl")
       mg.Draw("ap")
       mg.GetXaxis().SetRangeUser(0.,300.)
-      mg.GetXaxis().SetTitle("E_{T} (GeV)")
+      mg.GetXaxis().SetTitle(xAxisTitle)
       mg.GetYaxis().SetTitle("Efficiency")
       leg.Draw()
       c1.Print()
