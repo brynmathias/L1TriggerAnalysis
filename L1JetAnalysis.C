@@ -151,30 +151,8 @@ void L1JetAnalysis::BookHistos() {
   SumEt_100U = new TH1F("SumEt100","", 250,0.,1000.);
   L1SumEt = new TH1F("L1SumEt","", 250,0.,1000.);
 
-  const double etabins[23] = {
-    -5.000,
-      -4.500,
-        -4.000,
-          -3.500,
-            -3.000,
-              -2.172,
-                -1.740,
-                  -1.392,
-                    -1.044,
-                      -0.695,
-                        -0.348,
-                          0.000,
-                            0.348,
-                              0.695,
-                                1.044,
-                                  1.392,
-                                    1.740,
-                                      2.172,
-                                        3.000,
-                                          3.500,
-                                            4.000,
-                                              4.500,
-                                                5.000};
+  const double etabins[23]={-5.000,-4.500,-4.000,-3.500,-3.000,-2.172,
+  -1.740,-1.392, -1.044,-0.695,-0.348,0.000,0.348,0.695,1.044,1.392,1.740,2.172,3.000,3.500,4.000,4.500,5.000};
     L1EtaPhiMap = new TH2D("etaPhiMapL1","h2" ,22,etabins, 18, -1*TMath::Pi()-0.5, TMath::Pi()-0.5);
     RecoEtaPhiMap = new TH2F("etaPhiMapReco","h2" ,100,-5.,5.0, 31, -1*TMath::Pi()-0.5, TMath::Pi()-0.5);
 
@@ -260,10 +238,6 @@ void L1JetAnalysis::BookHistos() {
           if( l1extra_->ht > 125.){ RecoHTL1125->Fill( flyHT ,wgt);}
           if( l1extra_->ht > 150.){ RecoHTL1150->Fill( flyHT ,wgt); }
           if( l1extra_->ht > 175.){ RecoHTL1175->Fill( flyHT ,wgt); }
-          
-        
-        
-        
         }
         L1Ht ->Fill(l1extra_->ht,wgt );
         L1HtCorrelation->Fill(flyHT, l1extra_->ht,wgt);
