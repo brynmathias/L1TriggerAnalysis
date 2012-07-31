@@ -7,11 +7,13 @@ turnOns = {
 #"Denomiantor":[List of numerators]  
  "RefJet":["Jet16","Jet36","Jet52","Jet92",],
  "RecoHT":["RecoHTL150","RecoHTL175","RecoHTL1100","RecoHTL1150",],
-# Special set so that we dont need to have a different loop for drawing 2d histos as well as other 1d distros
-  "NoRatio":["EnCorrelation","L1HT","ResolutionAsFnOfeta","ResolutionAsFnOfpT"],
   "METReference":["MET30Pass","MET50Pass","MET70Pass"],
   "MHTReference":["MHT30Pass","MHT50Pass"],
   "SumEtReference":["SumEt60","SumEt100"]
+
+# Special set so that we dont need to have a different loop for drawing 2d histos as well as other 1d distros
+  "NoRatio":["EnCorrelation","L1HT","ResolutionAsFnOfeta","ResolutionAsFnOfpT"],
+
 }
 
 
