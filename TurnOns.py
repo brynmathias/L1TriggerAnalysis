@@ -2,15 +2,18 @@
 
 from plottingUtils import *
 
+def errorFun(x, par):
+  return 0.5*par[0]*(1. + r.TMath.Erf( (x[0] - par[1]) / (math.sqrt(2.)*par[2]) ))
+
+
 
 turnOns = {
 #"Denomiantor":[List of numerators]  
- "RefJet":["Jet16","Jet36","Jet52"],#"Jet92",],
+ "RefJet":["Jet16","Jet36","Jet52",]#"Jet92",],
  "RecoHT":["RecoHTL150","RecoHTL175","RecoHTL1100","RecoHTL1150",],
   "METReference":["MET30Pass","MET50Pass","MET70Pass"],
   "MHTReference":["MHT30Pass","MHT50Pass"],
   "SumEtReference":["SumEt60","SumEt100"],
-
 # Special set so that we dont need to have a different loop for drawing 2d histos as well as other 1d distros
   "NoRatio":["EnCorrelation","L1HT","ResolutionAsFnOfeta","ResolutionAsFnOfpT"],
 
@@ -50,8 +53,8 @@ def main():
     c1.canvas.SetLogy(False)
 
     f = r.TFile.Open(fname)
-    f.ls()
     if "NoRatio" not in key:
+      fitText = ""
       denominator = f.Get(key)
       # if "HT"  in key:
       denominator.Rebin(4)
@@ -59,11 +62,17 @@ def main():
       for trig in triggerL:
         if c == 5: c+=1
         numerator = f.Get(trig)
+        fermiFunction = r.TF1("fermiFunction",errorFun,10.,100.,3)
+        fermiFunction.SetParameters(1.00,10.,1.)
+        fermiFunction.SetParNames("#epsilon","#mu","#sigma")
+
+        
         # if "HT" in key:
         numerator.Rebin(4)
         TurnOn = r.TGraphAsymmErrors()
-        # TurnOn.SetTitle(trig)
         TurnOn.Divide(numerator,denominator)
+        TurnOn.Fit(fermiFunction,"%f"%(Cor),"%f"%(Cor),10.,100.)
+        fitText += "%s #sigma = %f, #mu = %f \n" %(trig,fermiFunction2.GetParameter(2),fermiFunction2.GetParameter(1))
         TurnOn.SetMarkerColor(c)
         TurnOn.SetLineColor(c)
         TurnOn.GetXaxis().SetTitle(xAxisTitle)
@@ -74,6 +83,7 @@ def main():
         c1.Print()
         c1.canvas.Print("%s.png"%(trig))
       c1.Clear()
+      print fitText
       mg = r.TMultiGraph()
       for g in turnOnList:
         mg.Add(g)
@@ -88,7 +98,6 @@ def main():
       c1.canvas.Print("multiGrap_%s.png"%key)
       c1.Print()
     else:
-
       for hist in triggerL:
         c1.canvas.SetLogy(False)
         hist = f.Get(hist)
