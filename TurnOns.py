@@ -5,11 +5,11 @@ from plottingUtils import *
 
 turnOns = {
 #"Denomiantor":[List of numerators]  
- "RefJet":["Jet16","Jet36","Jet52","Jet92",],
+ "RefJet":["Jet16","Jet36","Jet52"],#"Jet92",],
  "RecoHT":["RecoHTL150","RecoHTL175","RecoHTL1100","RecoHTL1150",],
   "METReference":["MET30Pass","MET50Pass","MET70Pass"],
   "MHTReference":["MHT30Pass","MHT50Pass"],
-  "SumEtReference":["SumEt60","SumEt100"]
+  "SumEtReference":["SumEt60","SumEt100"],
 
 # Special set so that we dont need to have a different loop for drawing 2d histos as well as other 1d distros
   "NoRatio":["EnCorrelation","L1HT","ResolutionAsFnOfeta","ResolutionAsFnOfpT"],
@@ -17,17 +17,18 @@ turnOns = {
 }
 
 
-fname = "./rootFiles/test.root"
+fname = "./L1MuHPF_NoFastJet.root"
 
 def main():
-  c1 = Print("out.pdf")
+  c1 = Print("L1MuHPF_NoFastJet.pdf")
   c1.DoPageNum = False
   c1.open()
   for key,triggerL in turnOns.iteritems():
     turnOnList = []
     names = []
-    xMax = 300.
+    xMax = 100.
     xAxisTitle = ""
+    if key != "NoRatio": yAxisTitle = "Efficiency"
     if "MET" in key: 
       xAxisTitle = "#slash{E}_{T} (GeV)"
       names = ["L1MET 30","L1MET 50","L1MET 70"]
@@ -65,6 +66,8 @@ def main():
         TurnOn.Divide(numerator,denominator)
         TurnOn.SetMarkerColor(c)
         TurnOn.SetLineColor(c)
+        TurnOn.GetXaxis().SetTitle(xAxisTitle)
+        TurnOn.GetYaxis().SetTitle(yAxisTitle)
         c+=1
         TurnOn.Draw("ap")
         turnOnList.append(TurnOn)

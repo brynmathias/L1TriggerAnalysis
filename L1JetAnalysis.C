@@ -131,7 +131,6 @@ void L1JetAnalysis::BookHistos() {
   L1mHt          = new TH1F("L1MHT","",1000,0.,1000.);
   L1Et           = new TH1F("L1Et","",1000,0.,1000.);
   L1MEt          = new TH1F("L1MET","",1000,0.,1000.);
-  L1METlated  = new TH1F("L1METlated","",1000,0.,1000.);
 
   MHT_30U        = new TH1F("MHT30Pass","", 300,0.,300.);
   MHT_20U        = new TH1F("MHT20Pass","", 300,0.,300.);

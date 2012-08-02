@@ -28,12 +28,17 @@ def main():
   print flist
   print "Will submit", len(flist) , "jobs"
   ensure_dir("./%s/"%args.outputDir)
+  ensure_dir("./%s/stdout"%args.outputDir)
+  ensure_dir("./%s/stderr"%args.outputDir)
+
   text = "%s subScript.sh %s %s %s %s"%(args.queue,args.analysis,args.inputFile,args.outputDir,args.Trigger)
   log = open("./%s/Log.txt"%args.outputDir,'w')
   log.write(text)
   for i in range(0,len(flist)):
-    os.system("qsub -q %s subScript.sh %s %s %s %s %s"%(args.queue,args.analysis,args.inputFile,args.outputDir,args.Trigger,i))
+    #print "qsub -q {queue} -e {err} -o {out} subScript.sh {an} {inp} {oDir} {trigger} {fNo}".format(queue=args.queue, err=args.outputDir+"stderr/",out=args.outputDir+"stdout/", an = args.analysis, inp = args.inputFile, oDir = args.outputDir, trigger = args.Trigger, fNo = i)
+    #os.system("qsub -q {queue} -e {err} -o {out} subScript.sh {an} {inp} {oDir} {trigger} {fNo}".format(queue=args.queue, err=args.outputDir+"/stderr",out=args.outputDir+"/stdout", an = args.analysis, inp = args.inputFile, oDir = args.outputDir, trigger = args.Trigger, fNo = i))
 
+    os.system("qsub -q {queue} subScript.sh {an} {inp} {oDir} {trigger} {fNo}".format(queue=args.queue, an = args.analysis, inp = args.inputFile, oDir = args.outputDir, trigger = args.Trigger, fNo = i))
 
 
 if __name__ == '__main__':

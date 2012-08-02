@@ -7,7 +7,7 @@ Analysis = sys.argv[1]
 outFile = sys.argv[3]
 outDir = sys.argv[3]
 Trigger = sys.argv[4]
-r.gROOT.ProcessLine(".x ~/cms04/CMSSW_5_2_3_patch3/src/UserCode/L1TriggerDPG/macros/initL1Analysis.C")
+r.gROOT.ProcessLine(".x ~/cms03/CMSSW_4_2_5/src/UserCode/L1TriggerDPG/macros/initL1Analysis.C")
 flist = file(inpu).readlines()
 print Analysis, inpu, outFile, Trigger
 idx = sys.argv[5]
