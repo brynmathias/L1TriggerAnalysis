@@ -9,7 +9,7 @@ def errorFun(x, par):
 
 turnOns = {
 #"Denomiantor":[List of numerators]  
- "RefJet":["Jet16","Jet36","Jet52",]#"Jet92",],
+ "RefJet":["Jet16","Jet36","Jet52",],#"Jet92",],
  "RecoHT":["RecoHTL150","RecoHTL175","RecoHTL1100","RecoHTL1150",],
   "METReference":["MET30Pass","MET50Pass","MET70Pass"],
   "MHTReference":["MHT30Pass","MHT50Pass"],
@@ -20,10 +20,10 @@ turnOns = {
 }
 
 
-fname = "./L1MuHPF_NoFastJet.root"
+fname = "./L1MuHPF_FastJet.root"
 
 def main():
-  c1 = Print("L1MuHPF_NoFastJet.pdf")
+  c1 = Print("L1MuHPF_FastJet.pdf")
   c1.DoPageNum = False
   c1.open()
   for key,triggerL in turnOns.iteritems():
@@ -71,8 +71,8 @@ def main():
         numerator.Rebin(4)
         TurnOn = r.TGraphAsymmErrors()
         TurnOn.Divide(numerator,denominator)
-        TurnOn.Fit(fermiFunction,"%f"%(Cor),"%f"%(Cor),10.,100.)
-        fitText += "%s #sigma = %f, #mu = %f \n" %(trig,fermiFunction2.GetParameter(2),fermiFunction2.GetParameter(1))
+        TurnOn.Fit(fermiFunction,"0.","1.",10.,100.)
+        fitText += "%s #sigma = %f, #mu = %f \n" %(trig,fermiFunction.GetParameter(2),fermiFunction.GetParameter(1))
         TurnOn.SetMarkerColor(c)
         TurnOn.SetLineColor(c)
         TurnOn.GetXaxis().SetTitle(xAxisTitle)
@@ -80,6 +80,7 @@ def main():
         c+=1
         TurnOn.Draw("ap")
         turnOnList.append(TurnOn)
+        fermiFunction.Draw("same")
         c1.Print()
         c1.canvas.Print("%s.png"%(trig))
       c1.Clear()
