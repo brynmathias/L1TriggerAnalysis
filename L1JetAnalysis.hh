@@ -295,7 +295,7 @@ bool L1JetAnalysis::MatchJet(int RecoJetIdx){
       minDeltaR = deltaR(recoJet_->eta[RecoJetIdx], recoJet_->phi[RecoJetIdx], l1extra_->fwdJetEta[i], l1extra_->fwdJetPhi[i]);
     }
   }
-  if(minDeltaR < .5){ return true; }
+  if(minDeltaR < 999.){ return true; }
   else return false;
 }
 
@@ -321,7 +321,7 @@ bool L1JetAnalysis::MatchEmuJet(int RecoJetIdx){
       minDeltaR = deltaR(recoJet_->eta[RecoJetIdx], recoJet_->phi[RecoJetIdx], l1emuextra_->fwdJetEta[i], l1emuextra_->fwdJetPhi[i]);
     }
   }
-  if(minDeltaR < .5){ return true; }
+  if(minDeltaR < 999.){ return true; }
   else return false;
 }
 
@@ -339,7 +339,7 @@ std::pair<int,int> L1JetAnalysis::ReturnMatchedJet(int RecoJetIdx){
     {
       minDeltaR = deltaR(recoJet_->eta[RecoJetIdx], recoJet_->phi[RecoJetIdx], l1extra_->cenJetEta[i], l1extra_->cenJetPhi[i]);
       //printf( "Delta R = %f \n", minDeltaR);
-      if(minDeltaR < .5){
+      if(minDeltaR < 999.){
       matchedJet.first = 0;
       matchedJet.second = i;
       }
@@ -352,7 +352,7 @@ std::pair<int,int> L1JetAnalysis::ReturnMatchedJet(int RecoJetIdx){
     {
       minDeltaR = deltaR(recoJet_->eta[RecoJetIdx], recoJet_->phi[RecoJetIdx], l1extra_->tauJetEta[i], l1extra_->tauJetPhi[i]);
       //printf( "Delta R = %f \n", minDeltaR);
-      if(minDeltaR < .5){
+      if(minDeltaR < 999.){
       matchedJet.first = 1;
       matchedJet.second = i;
       }
@@ -365,7 +365,7 @@ std::pair<int,int> L1JetAnalysis::ReturnMatchedJet(int RecoJetIdx){
     {
       minDeltaR = deltaR(recoJet_->eta[RecoJetIdx], recoJet_->phi[RecoJetIdx], l1extra_->fwdJetEta[i], l1extra_->fwdJetPhi[i]);
       //printf( "Delta R = %f \n", minDeltaR);
-      if(minDeltaR < .5){
+      if(minDeltaR < 999.){
       matchedJet.first = 2;
       matchedJet.second = i;
       }
@@ -387,7 +387,7 @@ std::pair<int,int> L1JetAnalysis::ReturnMatchedEmuJet(int RecoJetIdx){
     {
       minDeltaR = deltaR(recoJet_->eta[RecoJetIdx], recoJet_->phi[RecoJetIdx], l1emuextra_->cenJetEta[i], l1emuextra_->cenJetPhi[i]);
       //printf( "Delta R = %f \n", minDeltaR);
-      if(minDeltaR < .5){
+      if(minDeltaR < 999.){
       matchedJet.first = 0;
       matchedJet.second = i;
       }
@@ -400,7 +400,7 @@ std::pair<int,int> L1JetAnalysis::ReturnMatchedEmuJet(int RecoJetIdx){
     {
       minDeltaR = deltaR(recoJet_->eta[RecoJetIdx], recoJet_->phi[RecoJetIdx], l1emuextra_->tauJetEta[i], l1emuextra_->tauJetPhi[i]);
       //printf( "Delta R = %f \n", minDeltaR);
-      if(minDeltaR < .5){
+      if(minDeltaR < 999.){
       matchedJet.first = 1;
       matchedJet.second = i;
       }
@@ -413,7 +413,7 @@ std::pair<int,int> L1JetAnalysis::ReturnMatchedEmuJet(int RecoJetIdx){
     {
       minDeltaR = deltaR(recoJet_->eta[RecoJetIdx], recoJet_->phi[RecoJetIdx], l1emuextra_->fwdJetEta[i], l1emuextra_->fwdJetPhi[i]);
       //printf( "Delta R = %f \n", minDeltaR);
-      if(minDeltaR < .5){
+      if(minDeltaR < 999.){
       matchedJet.first = 2;
       matchedJet.second = i;
       }
