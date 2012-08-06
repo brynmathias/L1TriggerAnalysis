@@ -20,7 +20,7 @@ turnOns = {
 }
 
 
-files = ["./L1MuHPF_NoFastJet","./L1MuHPF_FastJet","./SingleMu"]
+files = ["./NoDR/L1MuHPF_NoFastJet","./NoDR/L1MuHPF_FastJet","./NoDR/SingleMu"]
 #fname = "./SingleMu.root"
 def main():
   for fname in files:
