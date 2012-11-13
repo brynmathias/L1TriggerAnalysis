@@ -245,9 +245,15 @@ void L1JetAnalysis::BookHistos() {
         // Try to match a L1 Jet to the zeroth reco Jet, return the l1 type and l1 index of
         
         if(ReturnMatchedQuantity(MatchedJet,Et) > 250. ) continue;
-
-        if(recoJet_->etCorr[leadJet]> RecoJetThreshold &&   
-           fabs(recoJet_->eta[leadJet])< 3. && LooseID(leadJet) ){ // check leading recoJet is with in
+        if(ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 250. ) continue;
+        if(recoJet_->etCorr[leadJet] < RecoJetThreshold ) continue;
+        if(fabs(recoJet_->eta[leadJet]) > 3.) continue;
+        if(!LooseID(leadJet) ) continue;
+             
+             
+             
+             
+              // check leading recoJet is with in
           double MatchedEta = fabs(ReturnMatchedQuantity(MatchedJet,Eta));
           EnCorrelation->Fill(recoJet_->etCorr[leadJet],ReturnMatchedQuantity(MatchedJet,Et),wgt);
           if( MatchedEta < 0.348 ) EnCorrelation_Eta_0->Fill(recoJet_->etCorr[leadJet],ReturnMatchedQuantity(MatchedJet,Et),wgt);
@@ -301,13 +307,6 @@ void L1JetAnalysis::BookHistos() {
           if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 92.) {L1_EmulatedJet92->Fill( recoJet_->etCorr[leadJet],wgt);}
           if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 128.){L1_EmulatedJet128->Fill(recoJet_->etCorr[leadJet],wgt);}
         }
-
-
-          
-        
-
- 
-
 
     // Timing studies
         for(size_t bx = 0; bx < 5; ++bx)
