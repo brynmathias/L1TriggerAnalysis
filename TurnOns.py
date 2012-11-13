@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from plottingUtils import *
-r.gStyle.SetOptFit(0)
+# r.gStyle.SetOptFit(0)
 def errorFun(x, par):
   return 0.5*par[0]*(1. + r.TMath.Erf( (x[0] - par[1]) / (math.sqrt(2.)*par[2]) ))
 
@@ -20,13 +20,12 @@ turnOns = {
 }
 
 
-files = ["./NoDR/L1MuHPF_NoFastJet","./NoDR/L1MuHPF_FastJet","./NoDR/SingleMu"]
+files = ["./SingleMu",]
 #fname = "./SingleMu.root"
 def main():
   for fname in files:
     c1 = Print("%s.pdf"%fname)
     c1.DoPageNum = False
-    c1.open()
     fitText = ""
 
     for key,triggerL in turnOns.iteritems():
@@ -53,7 +52,8 @@ def main():
       if "MHTReference" in key: 
         xAxisTitle = "#slash{H}_{T} (GeV)"
         names = ["L1HTM 30","L1HTM 50","L1HTM 70",]
-    
+      if "DeltaR" in key:
+        xAxisTitle = "#delta R"
       c1.canvas.SetLogy(False)
 
       f = r.TFile.Open(fname+".root")
@@ -64,13 +64,44 @@ def main():
         c = 1
         for trig in triggerL:
           fitLow = 0.
-          fitHigh = 100.
-          if trig == "Jet36": fitLow = 15.
-          if trig == "Jet52": fitLow = 20.
+          fitHigh = 500.
+          fitMid = 10.
+          if trig == "Jet16": 
+              fitLow = 15.
+              fitMid = 15.
+              fitHigh = 70.
+          if trig == "Jet36": 
+              fitLow = 15.
+              fitMid = 60.
+              fitHigh = 100.
+          if trig == "Jet52": 
+              fitLow = 20.
+              fitHigh = 140.
+          if trig == "RecoHTL150": 
+              fitMid = 75.
+              fitHigh = 400.
+          if trig == "RecoHTL175": 
+              fitMid = 100.
+              fitHigh = 400.              
+          if trig == "RecoHTL1100": 
+              fitMid = 175.
+              fitHigh = 400.
+          if trig == "RecoHTL1150": 
+              fitMid = 250.
+              fitHigh = 400.
+          if trig == "MET30Pass":
+            fitHigh = 200.
+            fitMid = 70.
+          if trig == "MET50Pass":
+            fitHigh = 200.
+            fitMid = 80.
+          if trig == "MET70Pass":
+            fitHigh = 200.
+            fitMid = 100.
           if c == 5: c+=1
           numerator = f.Get(trig)
           fermiFunction = r.TF1("fermiFunction",errorFun,fitLow,fitHigh,3)
-          fermiFunction.SetParameters(1.00,10.,1.)
+          fermiFunction.SetParameters(1.00,fitMid,1.)
           fermiFunction.SetParNames("#epsilon","#mu","#sigma")
 
         
@@ -79,7 +110,7 @@ def main():
           TurnOn = r.TGraphAsymmErrors()
           TurnOn.Divide(numerator,denominator)
           TurnOn.Fit(fermiFunction,"0.","1.",fitLow,fitHigh)
-          fitText += "%s #sigma = %f, #mu = %f \n" %(trig,fermiFunction.GetParameter(2),fermiFunction.GetParameter(1))
+          fitText += "%s #sigma = %f, #mu = %f #epslion = %f, Chi2 = %f\n" %(trig,fermiFunction.GetParameter(2),fermiFunction.GetParameter(1),fermiFunction.GetParameter(0),fermiFunction.GetChisquare()/fermiFunction.GetNDF())
           TurnOn.SetMarkerColor(c)
           TurnOn.SetLineColor(c)
           TurnOn.GetXaxis().SetTitle(xAxisTitle)
@@ -108,6 +139,8 @@ def main():
         for hist in triggerL:
           c1.canvas.SetLogy(False)
           hist = f.Get(hist)
+          hist.SetTitle("")
+          
           if isinstance(hist,r.TH2F):
             hist.GetXaxis().SetRangeUser(0.,300.)
             hist.GetYaxis().SetRangeUser(0.,300.)
@@ -118,6 +151,8 @@ def main():
             c1.canvas.SetLogy()
             hist.Draw("hist")
             hist.GetXaxis().SetRangeUser(10.,300.)
+            hist.GetXaxis().SetTitle(xAxisTitle)
+            hist.GetYaxis().SetTitle("Events / 0.053")
             c1.Print()
     print fitText      
     c1.close()

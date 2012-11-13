@@ -176,13 +176,13 @@ class L1JetAnalysis : public L1Ntuple
   TH1F *Gt2JetHT225Bin;
   TH1F *PassHT225;
   TH1F *RefHT225;
-  
-
-
-
-
-
-
+  TH1F *L1_EmulatedJet16; 
+  TH1F *L1_EmulatedJet20; 
+  TH1F *L1_EmulatedJet36; 
+  TH1F *L1_EmulatedJet52; 
+  TH1F *L1_EmulatedJet68; 
+  TH1F *L1_EmulatedJet92; 
+  TH1F *L1_EmulatedJet128;
 
 
 

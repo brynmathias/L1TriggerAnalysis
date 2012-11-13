@@ -23,31 +23,21 @@ void L1JetAnalysis::BookHistos() {
   double binspt_[nPtBins+1] = { 4.,10.,15.,20.,25.,30.,35.,40.,45.,50.,60.,70.,80.,90.,100.,110.,120.,130.,140.,150.,160.,170.,180.,190.,200.,210.,220.,230.,240.,250.,260. };
   double binseta_[12] = {0.0, 0.348, 0.695, 1.044, 1.392, 1.740, 2.172, 3.0, 3.5, 4.0, 4.5, 5.0 };
   NCenJets = new TH1F("NCenJets","n",20,-0.5,19.5);
-  RefJets = new TH1F("RefJet", "RefJetEt",1000,0.,1000);
-  ET10   = new TH1F( "JetEt10" , "JetEt",1000, 0., 1000.);
-  ET20   = new TH1F( "JetEt20" , "JetEt",1000, 0., 1000.);
-  ET30   = new TH1F( "JetEt30" , "JetEt",1000, 0., 1000.);
-  ET40   = new TH1F( "JetEt40" , "JetEt",1000, 0., 1000.);
-  ET50   = new TH1F( "JetEt50" , "JetEt",1000, 0., 1000.);
-  ET60   = new TH1F( "JetEt60" , "JetEt",1000, 0., 1000.);
-  ET70   = new TH1F( "JetEt70" , "JetEt",1000, 0., 1000.);
-  ET80   = new TH1F( "JetEt80" , "JetEt",1000, 0., 1000.);
-  ET90   = new TH1F( "JetEt90" , "JetEt",1000, 0., 1000.);
-  ET100   = new TH1F("JetEt100" , "JetEt",1000, 0., 1000.);
-  ET110   = new TH1F("JetEt110" , "JetEt",1000, 0., 1000.);
-  ET120   = new TH1F("JetEt120" , "JetEt",1000, 0., 1000.);
-  ET130   = new TH1F("JetEt130" , "JetEt",1000, 0., 1000.);
-  ET140   = new TH1F("JetEt140" , "JetEt",1000, 0., 1000.);
-  ET150   = new TH1F("JetEt150" , "JetEt",1000, 0., 1000.);
-
-
-  Bit15   = new TH1F("Jet16" , "JetEt",1000, 0., 1000.);
-  Bit16   = new TH1F("Jet20" , "JetEt",1000, 0., 1000.);
-  Bit17   = new TH1F("Jet36" , "JetEt",1000, 0., 1000.);
-  Bit18   = new TH1F("Jet52" , "JetEt",1000, 0., 1000.);
-  Bit19   = new TH1F("Jet68" , "JetEt",1000, 0., 1000.);
-  Bit20   = new TH1F("Jet92" , "JetEt",1000, 0., 1000.);
-  Bit21   = new TH1F("Jet128" , "JetEt",1000, 0., 1000.);
+  RefJets   = new TH1F("RefJet", "RefJetEt",1000, 0., 1000.);
+  L1Jet16   = new TH1F("Jet16" , "JetEt", 1000, 0., 1000.);
+  L1Jet20   = new TH1F("Jet20" , "JetEt", 1000, 0., 1000.);
+  L1Jet36   = new TH1F("Jet36" , "JetEt", 1000, 0., 1000.);
+  L1Jet52   = new TH1F("Jet52" , "JetEt", 1000, 0., 1000.);
+  L1Jet68   = new TH1F("Jet68" , "JetEt", 1000, 0., 1000.);
+  L1Jet92   = new TH1F("Jet92" , "JetEt", 1000, 0., 1000.);
+  L1Jet128  = new TH1F("Jet128" , "JetEt",1000, 0., 1000.);
+  L1_EmulatedJet16   = new TH1F("EmulatedJet16" , "JetEt",1000, 0., 1000.);
+  L1_EmulatedJet20   = new TH1F("EmulatedJet20" , "JetEt",1000, 0., 1000.);
+  L1_EmulatedJet36   = new TH1F("EmulatedJet36" , "JetEt",1000, 0., 1000.);
+  L1_EmulatedJet52   = new TH1F("EmulatedJet52" , "JetEt",1000, 0., 1000.);
+  L1_EmulatedJet68   = new TH1F("EmulatedJet68" , "JetEt",1000, 0., 1000.);
+  L1_EmulatedJet92   = new TH1F("EmulatedJet92" , "JetEt",1000, 0., 1000.);
+  L1_EmulatedJet128  = new TH1F("EmulatedJet128", "JetEt",1000, 0., 1000.);
   l1JetEn = new TH1F("L1Energy", "L1Et",1000,0., 1000.);
   l1Jet0 = new TH1F( "l1Jet0", "L1Et",1000,0.,1000.);
   l1Jet1 = new TH1F( "l1Jet1", "L1Et",1000,0.,1000.);
@@ -56,32 +46,22 @@ void L1JetAnalysis::BookHistos() {
   l1Jet4 = new TH1F( "l1Jet4", "L1Et",1000,0.,1000.);
   l1Jet5 = new TH1F( "l1Jet5", "L1Et",1000,0.,1000.);
   dR = new TH1F( "DeltaR", "#delta R", 60,0.,3.2);
-  Ra1Trig = new TH1F( "Ra1Trig", "HT",1000,0.,1000.);
-  RecoHTL1100 = new TH1F( "RecoHTL1100", "HT",1000,0.,1000.);
-  RecoHTL1150 = new TH1F( "RecoHTL1150", "HT",1000,0.,1000.);
-  RecoHTL175 = new TH1F( "RecoHTL175", "HT",1000,0.,1000.);
-  RecoHTL150 = new TH1F( "RecoHTL150", "HT",1000,0.,1000.);
-  RecoHTL1175 = new TH1F( "RecoHTL1175", "HT",1000,0.,1000.);
-  RecoHTL1125 = new TH1F( "RecoHTL1125", "HT",1000,0.,1000.);
-  RecoHTL1125_DiJet40 = new TH1F( "RecoHTL1125_DiJet40", "HT",1000,0.,1000.);
-  
-  DiJetHT275BinPassTrigger  = new TH1F( "DiJetHT275BinPassTrigger", "HT",1000,0.,1000.);
-  Gt2JetHT275BinPassTrigger = new TH1F( "Gt2JetHT275BinPassTrigger", "HT",1000,0.,1000.);
-  DiJetHT225BinPassTrigger  = new TH1F( "DiJetHT225BinPassTrigger", "HT",1000,0.,1000.);
-  Gt2JetHT225BinPassTrigger = new TH1F( "Gt2JetHT225BinPassTrigger", "HT",1000,0.,1000.);
-  DiJetHT275Bin  = new TH1F( "DiJetHT275Bin", "HT",1000,0.,1000.);
-  Gt2JetHT275Bin = new TH1F( "Gt2JetHT275Bin", "HT",1000,0.,1000.);
-  DiJetHT225Bin  = new TH1F( "DiJetHT225Bin", "HT",1000,0.,1000.);
-  Gt2JetHT225Bin = new TH1F( "Gt2JetHT225Bin", "HT",1000,0.,1000.);
-  PassHT225 = new TH1F( "PassHT225", "HT",1000,0.,1000.);
-  RefHT225 = new TH1F( "RefHT225", "HT",1000,0.,1000.);
-  
-  
-  
+  RecoHTL1100 = new TH1F( "RecoHTL1100", "HT", 1000, 0., 1000.);
+  RecoHTL1150 = new TH1F( "RecoHTL1150", "HT", 1000, 0., 1000.);
+  RecoHTL175  = new TH1F( "RecoHTL175",  "HT", 1000, 0., 1000.);
+  RecoHTL150  = new TH1F( "RecoHTL150",  "HT", 1000, 0., 1000.);
+  RecoHTL1175 = new TH1F( "RecoHTL1175", "HT", 1000, 0., 1000.);
+  RecoHTL1125 = new TH1F( "RecoHTL1125", "HT", 1000, 0., 1000.);
+    
+    
+  Reco_EumulatedHTL1100 = new TH1F( "RecoEmulatedHTL1100", "HT", 1000, 0., 1000.);
+  Reco_EumulatedHTL1150 = new TH1F( "RecoEmulatedHTL1150", "HT", 1000, 0., 1000.);
+  Reco_EumulatedHTL175  = new TH1F( "RecoEmulatedHTL175",  "HT", 1000, 0., 1000.);
+  Reco_EumulatedHTL150  = new TH1F( "RecoEmulatedHTL150",  "HT", 1000, 0., 1000.);
+  Reco_EumulatedHTL1175 = new TH1F( "RecoEmulatedHTL1175", "HT", 1000, 0., 1000.);
+  Reco_EumulatedHTL1125 = new TH1F( "RecoEmulatedHTL1125", "HT", 1000, 0., 1000.);  
   
   RecoHT = new TH1F( "RecoHT", "HT",1000,0.,1000.);
-  RecoHTDiJet60 = new TH1F( "RecoHTDiJet60", "HT",1000,0.,1000.);
-  L1MultJetTriggersInHT = new TH1F( "L1MultJetTriggersInHT", "HT",1000,0.,1000.);
   recoJetCorrelation = new TH2F( "RecoJetEtvsUnCorRecoJetEt",";Et(UnCorr);Et(Corr)",100,0.,500.,100,0.,500.);
 // CandidateJets30Gev = new TH1F("RefJet", "RefJetEt",200,0.,1000);
   RecoVsl1HFE       = new TH2F(     "RecoVsl1HFE",    "Offline Uncorrected Jet Et; L1 Jet Et",1000,0.,1000.,250,0.,1000);
@@ -172,78 +152,53 @@ void L1JetAnalysis::BookHistos() {
     TFile *theFile = new TFile(outputname, "RECREATE");
     theFile->cd();
     BookHistos();
-  
+    double RecoJetThreshold = 10.;
+    double wgt =1.0;
+    
     //number of events to process
     if (nevents==-1 || nevents>GetEntries()) nevents=GetEntries();
     std::cout << nevents  << " to process ..." << std::endl;
+      //  NB a bit of a hack to read out the correct value from the ReturnMatchedQuantity function -- Didnt know about Enums at the time, will re-write when there is time
+
+    const int Et = 1;
+    const int Eta = 2;
+    const int Phi = 3;
+    double ResolutionET;
+    double ResolutionHT;
+    double MetReso;
+    double MhtReso;
+    
+    
+    
+    
     //loop over the events
+    
+    
+    
+    
     for (Long64_t i= 0; i<   nevents; i++)
     {
       //load the i-th event
-      double RecoJetThreshold = 10.;
       Long64_t ientry = LoadTree(i); if (ientry < 0) break;
       GetEntry(i);
       //process progress
       if( i!=0 && ( i%10000 ) ==0 ) {std::cout << "- processing event " << i << "\r" << std::flush;}
-      double wgt =1.0;
-      // if( event_->run < 176503) continue;
-      // Check that we have jets in the event.
-      if((recoJet_->et).size() < 1) continue;
       // Trigger stuff
       if (!TriggerBit.IsWhitespace() && !PassHLT(TriggerBit) ) continue;
       // Energy sum triggers!
-      //Make an on the fly offline HT, use the same thresholds as the HLT. ie Jet40 Corrected with in |eta| < 3
-      double HtFrom30GeV = 0.;
-      double HtFrom37GeV = 0.;
+      double flyHT = 0;
+      for(unsigned jet = 0; jet < recoJet_->etCorr.size(); jet++){
+        if(fabs(recoJet_->eta[jet]) < 3. && recoJet_->etCorr[jet] > 40.) {flyHT += recoJet_->etCorr[jet];}
+      }
 
-      double flyHT = RecoJetHT(40.,3.);
-      double ht225Bin = RecoJetHT(50.*(275./375.),3.);
 
       // cout <<"Starting HT calculation" << endl;
 
-        for(unsigned int a = 0; a < l1extra_->nTauJets; a++){
-          TauJetOccupancyAllJets->Fill(  l1extra_->tauJetEta[a], l1extra_->tauJetPhi[a],1.);
-        }
+        ResolutionET = ( l1extra_->et - recoMet_->sumEt  ) / recoMet_->sumEt;
+        ResolutionHT = ( l1extra_->ht - flyHT  ) / flyHT;
 
-        if(l1extra_->nTauJets > 1 && l1extra_->tauJetEt[0] != l1extra_->tauJetEt[1]){
-          TauJetOccupancyLeadingJet->Fill(  l1extra_->tauJetEta[0], l1extra_->tauJetPhi[0],1.);
-        }
-
-        for(unsigned int b = 0; b < l1extra_->nIsoEm; b++){
-          ISOEmOccupancyAll->Fill(  l1extra_->isoEmEta[b], l1extra_->isoEmPhi[b],1.);
-        }
-
-        if(l1extra_->nIsoEm > 1 && l1extra_->isoEmEt[0] != l1extra_->isoEmEt[1]){
-          ISOEmOccupancyLeading->Fill(  l1extra_->isoEmEta[0], l1extra_->isoEmPhi[0],1.);
-        }
-      // cout <<"Finished making tapper plots" << endl;
-
-
-        double  ResolutionET = ( l1extra_->et - recoMet_->sumEt  ) / recoMet_->sumEt;
-        double  ResolutionHT = ( l1extra_->ht - flyHT  ) / flyHT;
-
-        double MetReso = ( l1extra_->met - recoMet_->met ) / recoMet_->met;
-        double MhtReso = ( l1extra_->mht - recoMet_->mHt ) / recoMet_->mHt;
-
-
-        if( flyHT > 0.){
-
-          NCenJets->Fill(l1extra_->cenJetEt.size(),wgt);
-          RecoHT->Fill( flyHT ,wgt);
-
-          if( l1extra_->ht > 50.){  RecoHTL150 ->Fill( flyHT ,wgt); }
-          if( l1extra_->ht > 75. ){ RecoHTL175 ->Fill( flyHT, wgt); }
-          if( l1extra_->ht > 100.){ RecoHTL1100->Fill( flyHT ,wgt); }
-          if( l1extra_->ht > 125.){ RecoHTL1125->Fill( flyHT ,wgt);}
-          if( l1extra_->ht > 150.){ RecoHTL1150->Fill( flyHT ,wgt); }
-          if( l1extra_->ht > 175.){ RecoHTL1175->Fill( flyHT ,wgt); }
-        }
-        L1Ht ->Fill(l1extra_->ht,wgt );
-        L1HtCorrelation->Fill(flyHT, l1extra_->ht,wgt);
-        L1mHt->Fill(l1extra_->mht,wgt);
-        L1Et ->Fill(l1extra_->et,wgt );
-        L1MEt->Fill(l1extra_->met,wgt);
-      // L1METlated->Fill(l1extra_->met,wgt);
+        MetReso = ( l1extra_->met - recoMet_->met ) / recoMet_->met;
+        MhtReso = ( l1extra_->mht - recoMet_->mHt ) / recoMet_->mHt;
 
 
         SumEtReference->Fill( recoMet_->sumEt ,wgt);
@@ -267,28 +222,32 @@ void L1JetAnalysis::BookHistos() {
         L1SumEt->Fill(l1extra_->et,wgt);
         L1SumEtCorrelation->Fill(recoMet_->sumEt,l1extra_->et,wgt);
 
+
       // Selection for the turn on curves
       // Note as corrected jets are no longer listed in pt order we now have to find the leading jet
       // Makeshift ENUms
-        int Et = 1;
-        int Eta = 2;
-        int Phi = 3;
+
         int leadJet = leadingOfflineJet();
+        bool match = MatchJet(leadJet);
+        bool matchEmu = MatchEmuJet(leadJet);
+        
         recoJetCorrelation->Fill(recoJet_->et[0],recoJet_->etCorr[leadJet],wgt);
-        if(l1extra_->cenJetEt.size() > 0 && l1extra_->cenJetEt.size() > 0){  L1CorVsUnCor->Fill(l1extra_->cenJetEt[0],l1extra_->cenJetEt[0]);}
+        
+        if(l1extra_->cenJetEt.size() > 0 && l1emuextra_->cenJetEt.size() > 0){  L1CorVsUnCor->Fill(l1extra_->cenJetEt[0],l1emuextra_->cenJetEt[0]);}
 
 
 
       //  Require only jets Matched to a L1 Jet
-        if ( !MatchJet(leadJet) ) continue; // only select events with a Matched jet, good for resolution stides but not eff
-      //  NB a bit of a hack to read out the correct value from the ReturnMatchedQuantity function -- Didnt know about Enums at the time, will re-write when there is time
-        std::pair <int,int> MatchedJet = ReturnMatchedJet(leadJet); // Try to match a L1 Jet to the zeroth reco Jet, return the l1 type and l1 index of
-        if(ReturnMatchedQuantity(MatchedJet,Et) > 250. ) continue;
-      // if( recoJet_->etCorr[leadJet] > 50.) continue;
-      // if(ReturnMatchedQuantity(MatchedJet,Et) < 80.) continue;
-      // if((recoJet_->etCorr[leadJet]-ReturnMatchedQuantity(MatchedJet,Et))/recoJet_->etCorr[leadJet] > 0. && (recoJet_->etCorr[leadJet]-ReturnMatchedQuantity(MatchedJet,Et))/recoJet_->etCorr[leadJet] < 0.5) continue;
 
-        if(recoJet_->etCorr[leadJet]> RecoJetThreshold && fabs(recoJet_->eta[leadJet])< 3. && LooseID(leadJet) ){ // check leading recoJet is with in
+
+        std::pair <int,int> MatchedJet = ReturnMatchedJet(leadJet);
+        std::pair <int,int> MatchedEmJet = ReturnMatchedEmuJet(leadJet);
+        // Try to match a L1 Jet to the zeroth reco Jet, return the l1 type and l1 index of
+        
+        if(ReturnMatchedQuantity(MatchedJet,Et) > 250. ) continue;
+
+        if(recoJet_->etCorr[leadJet]> RecoJetThreshold &&   
+           fabs(recoJet_->eta[leadJet])< 3. && LooseID(leadJet) ){ // check leading recoJet is with in
           double MatchedEta = fabs(ReturnMatchedQuantity(MatchedJet,Eta));
           EnCorrelation->Fill(recoJet_->etCorr[leadJet],ReturnMatchedQuantity(MatchedJet,Et),wgt);
           if( MatchedEta < 0.348 ) EnCorrelation_Eta_0->Fill(recoJet_->etCorr[leadJet],ReturnMatchedQuantity(MatchedJet,Et),wgt);
@@ -308,165 +267,46 @@ void L1JetAnalysis::BookHistos() {
 
 
 
-          dR->Fill(deltaR(recoJet_->eta[leadJet], recoJet_->phi[leadJet], ReturnMatchedQuantity(MatchedJet,Eta), ReturnMatchedQuantity(MatchedJet,Phi)),wgt);
+          dR->Fill(deltaR(recoJet_->eta[leadJet], recoJet_->phi[leadJet], 
+                          ReturnMatchedQuantity(MatchedJet,Eta),
+                          ReturnMatchedQuantity(MatchedJet,Phi)),wgt);
 
 
+         
+          
           RecoEtaPhiMap->Fill(recoJet_->eta[leadJet],recoJet_->phi[leadJet],wgt);
-          L1EtaPhiMap->Fill(ReturnMatchedQuantity(MatchedJet,Eta),ReturnMatchedQuantity(MatchedJet,Phi),wgt);
+          L1EtaPhiMap->Fill(ReturnMatchedQuantity(MatchedJet,Eta),
+                            ReturnMatchedQuantity(MatchedJet,Phi),wgt);
           l1JetEn->Fill(ReturnMatchedQuantity(MatchedJet,Et),wgt);
           RefJets->Fill(recoJet_->etCorr[leadJet],wgt); // Denominator for turn on curves
 
-
-
-
         // Ask for Corrected L1 Jets -- Use on 2011 Data
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 16.){
-            Bit15->Fill(recoJet_->etCorr[leadJet],wgt);
-            l1Jet0->Fill(ReturnMatchedQuantity(MatchedJet,Et),wgt);
-          } // now goes to SingleJet16
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 20.){
-            Bit16->Fill(recoJet_->etCorr[leadJet],wgt);
-            l1Jet1->Fill(ReturnMatchedQuantity(MatchedJet,Et),wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 36.){
-            Bit17->Fill(recoJet_->etCorr[leadJet],wgt);
-            l1Jet2->Fill(ReturnMatchedQuantity(MatchedJet,Et),wgt);
-          } // now goes to SingleJet52
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 52.){
-            Bit18->Fill(recoJet_->etCorr[leadJet],wgt);
-            l1Jet3->Fill(ReturnMatchedQuantity(MatchedJet,Et),wgt);
-          } // now goes to SingleJet68
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 68.){
-            Bit19->Fill(recoJet_->etCorr[leadJet],wgt);
-            l1Jet4->Fill(ReturnMatchedQuantity(MatchedJet,Et),wgt);
-          } // now goes to SingleJet92
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 92.){
-            Bit20->Fill(recoJet_->etCorr[leadJet],wgt);
-            l1Jet5->Fill(ReturnMatchedQuantity(MatchedJet,Et),wgt);
-          } // now goes to SingleJet128
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 128.){
-            Bit21->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet128
+      if(match){
+          if( ReturnMatchedQuantity(MatchedJet,Et) >16.)  {L1Jet16->Fill( recoJet_->etCorr[leadJet],wgt);} 
+          if( ReturnMatchedQuantity(MatchedJet,Et) > 20.) {L1Jet20->Fill( recoJet_->etCorr[leadJet],wgt);}
+          if( ReturnMatchedQuantity(MatchedJet,Et) > 36.) {L1Jet36->Fill( recoJet_->etCorr[leadJet],wgt);}
+          if( ReturnMatchedQuantity(MatchedJet,Et) > 52.) {L1Jet52->Fill( recoJet_->etCorr[leadJet],wgt);}
+          if( ReturnMatchedQuantity(MatchedJet,Et) > 68.) {L1Jet68->Fill( recoJet_->etCorr[leadJet],wgt);}
+          if( ReturnMatchedQuantity(MatchedJet,Et) > 92.) {L1Jet92->Fill( recoJet_->etCorr[leadJet],wgt);}
+          if( ReturnMatchedQuantity(MatchedJet,Et) > 128.){L1Jet128->Fill(recoJet_->etCorr[leadJet],wgt);}
+      }
 
 
+       if(matchEmu){
+          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) >16.)  {L1_EmulatedJet16->Fill( recoJet_->etCorr[leadJet],wgt);} 
+          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 20.) {L1_EmulatedJet20->Fill( recoJet_->etCorr[leadJet],wgt);}
+          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 36.) {L1_EmulatedJet36->Fill( recoJet_->etCorr[leadJet],wgt);}
+          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 52.) {L1_EmulatedJet52->Fill( recoJet_->etCorr[leadJet],wgt);}
+          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 68.) {L1_EmulatedJet68->Fill( recoJet_->etCorr[leadJet],wgt);}
+          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 92.) {L1_EmulatedJet92->Fill( recoJet_->etCorr[leadJet],wgt);}
+          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 128.){L1_EmulatedJet128->Fill(recoJet_->etCorr[leadJet],wgt);}
+        }
 
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 10.){
-            ET10->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 20.){
-            ET20->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 30.){
-            ET30->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 40.){
-            ET40->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 50.){
-            ET50->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 60.){
-            ET60->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 70.){
-            ET70->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 80.){
-            ET80->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 90.){
-            ET90->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 100.){
-            ET100->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 110.){
-            ET110->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 120.){
-            ET120->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 130.){
-            ET130->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 140.){
-            ET140->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
-          if( ReturnMatchedQuantity(MatchedJet,Et) > 150.){
-            ET150->Fill(recoJet_->etCorr[leadJet],wgt);
-          } // now goes to SingleJet36
+
           
-        }
+        
 
-    //Make a plot of the 0th L1 Jet energy
-
-    // Note that for the resolution studies we can use more than the leading jet -- enter different loop
-        for(size_t j = 0 ; j < recoJet_->etCorr.size(); ++j)
-        {
-          if ( !LooseID(j) ) continue;
-          if( MatchJet(j) ){
-            if( recoJet_->etCorr[j] < RecoJetThreshold ) continue;
-            std::pair <int,int> MatchedJetLoop = ReturnMatchedJet(j); // Try to match a L1 Jet to the jth reco Jet, return the l1 type and index of L1Jet
-            // if( recoJet_->etCorr[j] > 50.) continue;
-            // if(ReturnMatchedQuantity(MatchedJetLoop,Et) < 80.) continue;
-            // if((recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j] > 0. &&
-               // (recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j] < 0.5) continue;
-
-             // barrel jets
-            if(ReturnMatchedQuantity(MatchedJetLoop,Et) > 250.) continue;
-            if(ReturnMatchedQuantity(MatchedJetLoop,Et) < 10. ) continue;
-            EMF->Fill(recoJet_->eEMF[j],wgt);
-            ResolutionAsFnOfeta->Fill(fabs(ReturnMatchedQuantity(MatchedJetLoop,Eta)), ReturnMatchedQuantity(MatchedJetLoop,Et)/(recoJet_->etCorr[j]),wgt);
-            ResolutionAsFnOfpT->Fill(ReturnMatchedQuantity(MatchedJetLoop,Et), ReturnMatchedQuantity(MatchedJetLoop,Et)/(recoJet_->etCorr[j]),wgt);
-
-            if(fabs(recoJet_->eta[j]) < 3.){
-              ResolutionAsFnOfeta_eta3->Fill(fabs(ReturnMatchedQuantity(MatchedJetLoop,Eta)), ReturnMatchedQuantity(MatchedJetLoop,Et)/(recoJet_->etCorr[j]),wgt);
-              ResolutionAsFnOfpT_eta3->Fill(ReturnMatchedQuantity(MatchedJetLoop,Et), ReturnMatchedQuantity(MatchedJetLoop,Et)/(recoJet_->etCorr[j]),wgt);
-
-            }
-            if( fabs(recoJet_->eta[j]) < 1.3 ){
-              if(recoJet_->eEMF[j] > 0.9){
-                RecoVsl1EB->Fill(recoJet_->etCorr[j],ReturnMatchedQuantity(MatchedJetLoop,Et),wgt);
-                ResolutionEtEB->Fill(recoJet_->etCorr[j], (recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-                ResolutionEB->Fill((recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-              }
-              if(recoJet_->eEMF[j] < 0.4){
-                RecoVsl1HB->Fill(recoJet_->etCorr[j],ReturnMatchedQuantity(MatchedJetLoop,Et),wgt);
-                ResolutionEtHB->Fill(recoJet_->etCorr[j], (recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-                ResolutionHB->Fill((recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-              }
-            }
-                 //endcap jets
-            if(fabs(recoJet_->eta[j]) > 1.3 && fabs(recoJet_->eta[j]) < 3.0){
-              if(recoJet_->eEMF[j] > 0.9){
-                RecoVsl1EE->Fill(recoJet_->etCorr[j],ReturnMatchedQuantity(MatchedJetLoop,Et),wgt);
-                ResolutionEtEE->Fill(recoJet_->etCorr[j], (recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-                ResolutionEE->Fill((recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-              }
-              if(recoJet_->eEMF[j] < 0.4){
-                RecoVsl1HE->Fill(recoJet_->etCorr[j],ReturnMatchedQuantity(MatchedJetLoop,Et),wgt);
-                ResolutionEtHE->Fill(recoJet_->etCorr[j], (recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-                ResolutionHE->Fill((recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-              }
-
-            }
-         //forward jets
-            if(fabs(recoJet_->eta[j]) > 3.0 ){
-              if(recoJet_->eEMF[j] > 0.9){
-                RecoVsl1HFE->Fill(recoJet_->etCorr[j],ReturnMatchedQuantity(MatchedJetLoop,Et),wgt);
-                ResolutionEtHFE->Fill(recoJet_->etCorr[j], (recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-                ResolutionHFE->Fill((recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-              }
-              if(recoJet_->eEMF[j] < 0.4){
-                RecoVsl1HFH->Fill(recoJet_->etCorr[j],ReturnMatchedQuantity(MatchedJetLoop,Et),wgt);
-                ResolutionEtHFH->Fill(recoJet_->etCorr[j], (recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-                ResolutionHFH->Fill((recoJet_->etCorr[j]-ReturnMatchedQuantity(MatchedJetLoop,Et))/recoJet_->etCorr[j],wgt);
-              }
-
-            }
-
-          }
-        }
+ 
 
 
     // Timing studies
