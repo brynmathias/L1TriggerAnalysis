@@ -189,7 +189,7 @@ void L1JetAnalysis::BookHistos() {
         if(recoJet_->etCorr[leadJet] < RecoJetThreshold ) continue;
         if(fabs(recoJet_->eta[leadJet]) > 3.) continue;
         if(!LooseID(leadJet) ) continue;
-        RefJets->Fill(recoJet_->etCorr[leadJet],wgt); // Denominator for turn on curves
+        if(match && matchEmu)       RefJets->Fill(recoJet_->etCorr[leadJet],wgt); // Denominator for turn on curves
         // Ask for Corrected L1 Jets -- Use on 2011 Data
       if(match && (ReturnMatchedQuantity(MatchedJet,Et) < 250.)){
           if( ReturnMatchedQuantity(MatchedJet,Et) > 16.) {L1Jet16->Fill( recoJet_->etCorr[leadJet],wgt);} 

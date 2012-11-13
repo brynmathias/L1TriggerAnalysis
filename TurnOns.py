@@ -7,20 +7,22 @@ def errorFun(x, par):
 
 
 
+"EmulatedJet16","EmulatedJet20","EmulatedJet36","EmulatedJet52","EmulatedJet68","EmulatedJet92",
+
 turnOns = {
 #"Denomiantor":[List of numerators]  
- "RefJet":["Jet16","Jet36","Jet52",],#"Jet92",],
- "RecoHT":["RecoHTL150","RecoHTL175","RecoHTL1100","RecoHTL1150",],
-  "METReference":["MET30Pass","MET50Pass","MET70Pass"],
-  "MHTReference":["MHT30Pass","MHT50Pass"],
-  "SumEtReference":["SumEt60","SumEt100"],
+ "RefJet":["Jet16","EmulatedJet16","Jet36","EmulatedJet36",]#"Jet52","Jet92","EmulatedJet20","EmulatedJet36","EmulatedJet52","EmulatedJet68","EmulatedJet92",],
+ # "RecoHT":["RecoHTL150","RecoHTL175","RecoHTL1100","RecoHTL1150",],
+  # "METReference":["MET30Pass","MET50Pass","MET70Pass"],
+  # "MHTReference":["MHT30Pass","MHT50Pass"],
+  # "SumEtReference":["SumEt60","SumEt100"],
 # Special set so that we dont need to have a different loop for drawing 2d histos as well as other 1d distros
-  "NoRatio":["EnCorrelation","L1HT","ResolutionAsFnOfeta","ResolutionAsFnOfpT","DeltaR"],
+  # "NoRatio":["EnCorrelation","L1HT","ResolutionAsFnOfeta","ResolutionAsFnOfpT","DeltaR"],
 
 }
 
 
-files = ["./SingleMu",]
+files = ["./test",]
 #fname = "./SingleMu.root"
 def main():
   for fname in files:
@@ -66,15 +68,15 @@ def main():
           fitLow = 0.
           fitHigh = 500.
           fitMid = 10.
-          if trig == "Jet16": 
+          if "Jet16" in trig: 
               fitLow = 15.
               fitMid = 15.
               fitHigh = 70.
-          if trig == "Jet36": 
+          if "Jet36" in trig: 
               fitLow = 15.
               fitMid = 60.
               fitHigh = 100.
-          if trig == "Jet52": 
+          if  "Jet52" in trig: 
               fitLow = 20.
               fitHigh = 140.
           if trig == "RecoHTL150": 
@@ -108,6 +110,7 @@ def main():
           # if "HT" in key:
           numerator.Rebin(4)
           TurnOn = r.TGraphAsymmErrors()
+          TurnOn.SetTitle(trig)
           TurnOn.Divide(numerator,denominator)
           TurnOn.Fit(fermiFunction,"0.","1.",fitLow,fitHigh)
           fitText += "%s #sigma = %f, #mu = %f #epslion = %f, Chi2 = %f\n" %(trig,fermiFunction.GetParameter(2),fermiFunction.GetParameter(1),fermiFunction.GetParameter(0),fermiFunction.GetChisquare()/fermiFunction.GetNDF())
