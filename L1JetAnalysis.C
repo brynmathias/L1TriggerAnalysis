@@ -241,7 +241,7 @@ void L1JetAnalysis::BookHistos() {
 
 
         std::pair <int,int> MatchedJet = ReturnMatchedJet(leadJet);
-        std::pair <int,int> MatchedEmJet = ReturnMatchedEmuJet(leadJet);
+        std::pair <int,int> MatchedEmuJet = ReturnMatchedEmuJet(leadJet);
         // Try to match a L1 Jet to the zeroth reco Jet, return the l1 type and l1 index of
         
         if(ReturnMatchedQuantity(MatchedJet,Et) > 250. ) continue;
