@@ -55,6 +55,17 @@ class L1JetAnalysis : public L1Ntuple
   TH1F *L1Jet92; 
   TH1F *L1Jet128;
 
+  TH1F *Reco_EumulatedHTL1100;
+  TH1F *Reco_EumulatedHTL1150;
+  TH1F *Reco_EumulatedHTL175; 
+  TH1F *Reco_EumulatedHTL150; 
+  TH1F *Reco_EumulatedHTL1175;
+  TH1F *Reco_EumulatedHTL1125;
+
+
+
+
+
 
   TH1F *l1Jet0;
   TH1F *l1Jet1;
