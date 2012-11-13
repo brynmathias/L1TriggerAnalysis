@@ -47,13 +47,15 @@ class L1JetAnalysis : public L1Ntuple
   TH1F *NCenJets;
   TH1F *l1JetEn;
   TH1F *RefJets;
-  TH1F *Bit15;
-  TH1F *Bit16;
-  TH1F *Bit17;
-  TH1F *Bit18;
-  TH1F *Bit19;
-  TH1F *Bit20;
-  TH1F *Bit21;
+  TH1F *L1Jet16; 
+  TH1F *L1Jet20; 
+  TH1F *L1Jet36; 
+  TH1F *L1Jet52; 
+  TH1F *L1Jet68; 
+  TH1F *L1Jet92; 
+  TH1F *L1Jet128;
+
+
   TH1F *l1Jet0;
   TH1F *l1Jet1;
   TH1F *l1Jet2;
