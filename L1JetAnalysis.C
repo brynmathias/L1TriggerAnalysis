@@ -94,7 +94,7 @@ void L1JetAnalysis::BookHistos() {
   EnCorrelation_Eta_9= new TH2F(  "EnCorrelation9", ";RecoJetEt;L1JetEt",250,0.,1000.,250,0.,1000.);
   EnCorrelation_Eta_10= new TH2F( "EnCorrelation10",";RecoJetEt;L1JetEt",250,0.,1000.,250,0.,1000.);
   EnCorrelation_Eta_11= new TH2F( "EnCorrelation11",";RecoJetEt;L1JetEt",250,0.,1000.,250,0.,1000.);
-  L1CorVsUnCor      = new TH2F("L1CorVsUnCor", ";L1Corrected;L1UnCOrrected",63,0.,252.,63,0.,252.);
+  L1CorVsUnCor      = new TH2F("L1CorVsUnCor", ";E_{T} Old Corrections (GeV);E_{T} New Corrections (GeV)",63,0.,252.,63,0.,252.);
   EMF               = new TH1F("EMF","Jet[0] FEM",100,-1.,1.);
   timeMap           = new TH2I("Bits", "Bunch Crossing vs trigger bit", 130, 0., 130., 10, 0., 10.);
   ResolutionAsFnOfpT = new TH2F("ResolutionAsFnOfpT"," ; L1 P_{T}; #frac{L1 P_{T}}{Reco P_{T}} ",nPtBins ,binspt_ ,200,-10.,10.);
