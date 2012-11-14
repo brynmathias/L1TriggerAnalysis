@@ -545,7 +545,7 @@ double L1JetAnalysis::ReturnMatchedEmuQuantity( std::pair<int,int> matchJet,int 
   std::vector<TString>::iterator TrigEnd = event_->hlt.end();
   TString ne = TrigBit.Chop();
   for( ; TrigList!=TrigEnd ; ++ TrigList){
-    // std::cout << *TrigList << " Compared  " << ne << std::endl;
+     //std::cout << *TrigList << " Compared  " << ne << std::endl;
     if( TrigList->Contains( ne ) ) {
      return true; }
      }
