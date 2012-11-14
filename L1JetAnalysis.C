@@ -169,6 +169,7 @@ void L1JetAnalysis::BookHistos() {
       //load the i-th event
       Long64_t ientry = LoadTree(i); if (ientry < 0) break;
       GetEntry(i);
+      if(recoJet_->eta.size() < 1) continue;
       //process progress
       if( i!=0 && ( i%10000 ) ==0 ) {std::cout << "- processing event " << i << "\r" << std::flush;}
       // Trigger stuff
