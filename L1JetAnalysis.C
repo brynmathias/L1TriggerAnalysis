@@ -150,7 +150,7 @@ void L1JetAnalysis::BookHistos() {
     TFile *theFile = new TFile(outputname, "RECREATE");
     theFile->cd();
     BookHistos();
-    double RecoJetThreshold = 10.;
+    double RecoJetThreshold = 0.;
     double wgt =1.0;    
     //number of events to process
     if (nevents==-1 || nevents>GetEntries()) nevents=GetEntries();
@@ -191,8 +191,8 @@ void L1JetAnalysis::BookHistos() {
         if(recoJet_->etCorr[leadJet] < RecoJetThreshold ) continue;
         if(fabs(recoJet_->eta[leadJet]) > 3.) continue;
         if(!LooseID(leadJet) ) continue;
-        if(match && (ReturnMatchedQuantity(MatchedJet,Et) < 250.) )       RefJets->Fill(recoJet_->etCorr[leadJet],wgt); // Denominator for turn on curves
-        if(matchEmu && (ReturnMatchedEmuQuantity(MatchedEmuJet,Et) < 250.) ) EmuRef->Fill(recoJet_->etCorr[leadJet],wgt);
+        if(match)    RefJets->Fill(recoJet_->etCorr[leadJet],wgt);
+        if(matchEmu) EmuRef->Fill(recoJet_->etCorr[leadJet],wgt);
         // Ask for Corrected L1 Jets -- Use on 2011 Data
       if(match && (ReturnMatchedQuantity(MatchedJet,Et) < 250.)){
           if( ReturnMatchedQuantity(MatchedJet,Et) > 16.) {L1Jet16->Fill( recoJet_->etCorr[leadJet],wgt);} 

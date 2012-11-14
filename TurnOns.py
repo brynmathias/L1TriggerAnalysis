@@ -11,8 +11,9 @@ def errorFun(x, par):
 
 turnOns = {
 #"Denomiantor":[List of numerators]  
- "RefJet":["Jet16","EmulatedJet16","Jet36","EmulatedJet36",]#"Jet52","Jet92","EmulatedJet20","EmulatedJet36","EmulatedJet52","EmulatedJet68","EmulatedJet92",],
+ "RefJet":["Jet16","EmulatedJet16","Jet36","EmulatedJet36",],#"Jet52","Jet92","EmulatedJet20","EmulatedJet36","EmulatedJet52","EmulatedJet68","EmulatedJet92",],
  # "RecoHT":["RecoHTL150","RecoHTL175","RecoHTL1100","RecoHTL1150",],
+ "RefJetEmu":["EmulatedJet16","EmulatedJet20","EmulatedJet36","EmulatedJet52","EmulatedJet68","EmulatedJet92",]
   # "METReference":["MET30Pass","MET50Pass","MET70Pass"],
   # "MHTReference":["MHT30Pass","MHT50Pass"],
   # "SumEtReference":["SumEt60","SumEt100"],
