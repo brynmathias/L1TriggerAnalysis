@@ -47,6 +47,7 @@ class L1JetAnalysis : public L1Ntuple
   TH1F *NCenJets;
   TH1F *l1JetEn;
   TH1F *RefJets;
+  TH1F *EmuRef;
   TH1F *L1Jet16; 
   TH1F *L1Jet20; 
   TH1F *L1Jet36; 

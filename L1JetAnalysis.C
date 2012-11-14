@@ -24,6 +24,7 @@ void L1JetAnalysis::BookHistos() {
   double binseta_[12] = {0.0, 0.348, 0.695, 1.044, 1.392, 1.740, 2.172, 3.0, 3.5, 4.0, 4.5, 5.0 };
   NCenJets = new TH1F("NCenJets","n",20,-0.5,19.5);
   RefJets   = new TH1F("RefJet", "RefJetEt",1000, 0., 1000.);
+  EmuRef    = new TH1F("RefJetEmu", "RefJetEt",1000, 0., 1000.);
   L1Jet16   = new TH1F("Jet16" , "JetEt", 1000, 0., 1000.);
   L1Jet20   = new TH1F("Jet20" , "JetEt", 1000, 0., 1000.);
   L1Jet36   = new TH1F("Jet36" , "JetEt", 1000, 0., 1000.);
@@ -189,7 +190,8 @@ void L1JetAnalysis::BookHistos() {
         if(recoJet_->etCorr[leadJet] < RecoJetThreshold ) continue;
         if(fabs(recoJet_->eta[leadJet]) > 3.) continue;
         if(!LooseID(leadJet) ) continue;
-        if(match && matchEmu && (ReturnMatchedQuantity(MatchedJet,Et) < 250.)&& (ReturnMatchedEmuQuantity(MatchedEmuJet,Et) < 250.) )       RefJets->Fill(recoJet_->etCorr[leadJet],wgt); // Denominator for turn on curves
+        if(match && (ReturnMatchedQuantity(MatchedJet,Et) < 250.) )       RefJets->Fill(recoJet_->etCorr[leadJet],wgt); // Denominator for turn on curves
+        if(matchEmu && (ReturnMatchedEmuQuantity(MatchedEmuJet,Et) < 250.) ) EmuRef->Fill(recoJet_->etCorr[leadJet],wgt);
         // Ask for Corrected L1 Jets -- Use on 2011 Data
       if(match && (ReturnMatchedQuantity(MatchedJet,Et) < 250.)){
           if( ReturnMatchedQuantity(MatchedJet,Et) > 16.) {L1Jet16->Fill( recoJet_->etCorr[leadJet],wgt);} 
