@@ -122,6 +122,7 @@ class L1JetAnalysis : public L1Ntuple
   TH2F *EnCorrelation_Eta_10;
   TH2F *EnCorrelation_Eta_11;
   TH2F *RecoEtaPhiMap;
+  TH2F *recoJetCorrelationEmu;
   TH2F *ResolutionHistoET;
   TH2F *ResolutionHistoHT;
   TH2F *MetHisto;

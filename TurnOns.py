@@ -1,19 +1,19 @@
 #!/usr/bin/env python
 
 from plottingUtils import *
-# r.gStyle.SetOptFit(0)
+r.gStyle.SetOptFit(0)
 def errorFun(x, par):
   return 0.5*par[0]*(1. + r.TMath.Erf( (x[0] - par[1]) / (math.sqrt(2.)*par[2]) ))
 
 
 
-"EmulatedJet16","EmulatedJet20","EmulatedJet36","EmulatedJet52","EmulatedJet68","EmulatedJet92",
+# "EmulatedJet16","EmulatedJet20","EmulatedJet36","EmulatedJet52","EmulatedJet68","EmulatedJet92",
 
 turnOns = {
 #"Denomiantor":[List of numerators]  
- "RefJet":["Jet16","Jet36",],#"Jet52","Jet92","EmulatedJet20","EmulatedJet36","EmulatedJet52","EmulatedJet68","EmulatedJet92",],
+ "RefJet":["Jet16","Jet36","Jet52","Jet92"],#,"EmulatedJet20","EmulatedJet36","EmulatedJet52","EmulatedJet68","EmulatedJet92",],
  # "RecoHT":["RecoHTL150","RecoHTL175","RecoHTL1100","RecoHTL1150",],
- "RefJetEmu":["EmulatedJet16","EmulatedJet20","EmulatedJet36","EmulatedJet52","EmulatedJet68","EmulatedJet92",],
+ # "RefJetEmu":["EmulatedJet16","EmulatedJet36","EmulatedJet52"],
   # "METReference":["MET30Pass","MET50Pass","MET70Pass"],
   # "MHTReference":["MHT30Pass","MHT50Pass"],
   # "SumEtReference":["SumEt60","SumEt100"],
@@ -23,14 +23,15 @@ turnOns = {
 }
 
 
-files = ["./Physics",]
+files = ["./ZeroBias",]
 #fname = "./SingleMu.root"
 def main():
   for fname in files:
+    
     c1 = Print("%s.pdf"%fname)
     c1.DoPageNum = False
     fitText = ""
-
+    everything = []
     for key,triggerL in turnOns.iteritems():
     
       turnOnList = []
@@ -64,6 +65,7 @@ def main():
         denominator = f.Get(key)
         # if "HT"  in key:
         denominator.Rebin(4)
+        everything.append(denominator)
         c = 1
         for trig in triggerL:
           fitLow = 0.
@@ -80,6 +82,10 @@ def main():
           if  "Jet52" in trig: 
               fitLow = 20.
               fitHigh = 140.
+          if  "Jet92" in trig: 
+              fitLow = 20.
+              fitHigh = 200.
+              fitMid = 100.
           if trig == "RecoHTL150": 
               fitMid = 75.
               fitHigh = 400.
@@ -102,16 +108,18 @@ def main():
             fitHigh = 200.
             fitMid = 100.
           if c == 5: c+=1
+          
           numerator = f.Get(trig)
+          everything.append(numerator)
           fermiFunction = r.TF1("fermiFunction",errorFun,fitLow,fitHigh,3)
           fermiFunction.SetParameters(1.00,fitMid,1.)
           fermiFunction.SetParNames("#epsilon","#mu","#sigma")
-
+          everything.append(fermiFunction)
         
           # if "HT" in key:
           numerator.Rebin(4)
           TurnOn = r.TGraphAsymmErrors()
-          TurnOn.SetTitle(trig)
+          # TurnOn.SetTitle(trig)
           TurnOn.Divide(numerator,denominator)
           TurnOn.Fit(fermiFunction,"0.","1.",fitLow,fitHigh)
           fitText += "%s #sigma = %f, #mu = %f #epslion = %f, Chi2 = %f\n" %(trig,fermiFunction.GetParameter(2),fermiFunction.GetParameter(1),fermiFunction.GetParameter(0),fermiFunction.GetChisquare()/fermiFunction.GetNDF())
@@ -119,8 +127,12 @@ def main():
           TurnOn.SetLineColor(c)
           TurnOn.GetXaxis().SetTitle(xAxisTitle)
           TurnOn.GetYaxis().SetTitle(yAxisTitle)
+          TurnOn.GetYaxis().SetTitleSize(TurnOn.GetXaxis().GetTitleSize())
+          TurnOn.GetYaxis().SetTitleOffset(0.8)
           c+=1
           TurnOn.Draw("ap")
+          TurnOn.GetXaxis().SetRangeUser(0.,200.)
+          
           turnOnList.append(TurnOn)
           fermiFunction.Draw("same")
           c1.Print()
@@ -133,8 +145,10 @@ def main():
         for g,name in zip(turnOnList,names):
           leg.AddEntry(g,name,"pl")
         mg.Draw("ap")
-        mg.GetXaxis().SetRangeUser(0.,xMax)
+        mg.GetXaxis().SetRangeUser(0.,220.)
         mg.GetXaxis().SetTitle(xAxisTitle)
+        mg.GetYaxis().SetTitleSize(mg.GetXaxis().GetTitleSize())
+        mg.GetYaxis().SetTitleOffset(0.8)
         mg.GetYaxis().SetTitle("Efficiency")
         leg.Draw()
         # c1.canvas.Print("multiGrap_%s.png"%key)
@@ -143,7 +157,7 @@ def main():
         for hist in triggerL:
           c1.canvas.SetLogy(False)
           hist = f.Get(hist)
-          hist.SetTitle("")
+          # hist.SetTitle("")
           
           if isinstance(hist,r.TH2F):
             hist.GetXaxis().SetRangeUser(0.,300.)
@@ -158,9 +172,12 @@ def main():
             hist.GetXaxis().SetTitle(xAxisTitle)
             hist.GetYaxis().SetTitle("Events / 0.053")
             c1.Print()
-    print fitText      
+
+    
+    print fitText
+    c1.Print()    
     c1.close()
-  pass
+  
   
   
   
