@@ -204,7 +204,7 @@ void L1JetAnalysis::BookHistos() {
           if( ReturnMatchedQuantity(MatchedJet,Et) > 68.) {L1Jet68->Fill( recoJet_->etCorr[leadJet],wgt);}
           if( ReturnMatchedQuantity(MatchedJet,Et) > 92.) {L1Jet92->Fill( recoJet_->etCorr[leadJet],wgt);}
           if( ReturnMatchedQuantity(MatchedJet,Et) > 128.){L1Jet128->Fill(recoJet_->etCorr[leadJet],wgt);}
-          recoJetCorrelation->Fill(ReturnMatchedQuantity(MatchedJet,Et),recoJet_->etCorr[leadJet],wgt);
+          recoJetCorrelation->Fill(recoJet_->etCorr[leadJet],ReturnMatchedQuantity(MatchedJet,Et),wgt);
       }
 
        if(matchEmu && (ReturnMatchedEmuQuantity(MatchedEmuJet,Et) < 250.)){
@@ -215,7 +215,7 @@ void L1JetAnalysis::BookHistos() {
           if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 68.) {L1_EmulatedJet68->Fill( recoJet_->etCorr[leadJet],wgt);}
           if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 92.) {L1_EmulatedJet92->Fill( recoJet_->etCorr[leadJet],wgt);}
           if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 128.){L1_EmulatedJet128->Fill(recoJet_->etCorr[leadJet],wgt);}
-          recoJetCorrelationEmu->Fill(ReturnMatchedEmuQuantity(MatchedEmuJet,Et),recoJet_->etCorr[leadJet],wgt);
+          recoJetCorrelationEmu->Fill(recoJet_->etCorr[leadJet],ReturnMatchedEmuQuantity(MatchedEmuJet,Et),wgt);
         }
 
     // Timing studies
