@@ -18,12 +18,12 @@ turnOns = {
   # "MHTReference":["MHT30Pass","MHT50Pass"],
   # "SumEtReference":["SumEt60","SumEt100"],
 # Special set so that we dont need to have a different loop for drawing 2d histos as well as other 1d distros
-  "NoRatio":["L1CorVsUnCor","RecoJetvsL1Jet","RecoJetvsL1JetEmu"],
+  # "NoRatio":["L1CorVsUnCor","RecoJetvsL1Jet","RecoJetvsL1JetEmu"],
 
 }
 
 
-files = ["./JetAll",]
+files = ["./IsoMu24_L1Fast",]
 #fname = "./SingleMu.root"
 def main():
   for fname in files:

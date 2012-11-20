@@ -158,6 +158,7 @@ void L1JetAnalysis::BookHistos() {
     if (nevents==-1 || nevents>GetEntries()) nevents=GetEntries();
     std::cout << nevents  << " to process ..." << std::endl;
       //  NB a bit of a hack to read out the correct value from the ReturnMatchedQuantity function -- Didnt know about Enums at the time, will re-write when there is time
+      // Makeshift ENUms
     const int Et = 1;
     const int Eta = 2;
     const int Phi = 3;
@@ -181,7 +182,18 @@ void L1JetAnalysis::BookHistos() {
       for(unsigned jet = 0; jet < recoJet_->etCorr.size(); jet++){
         if(fabs(recoJet_->eta[jet]) < 3. && recoJet_->etCorr[jet] > 40.) {flyHT += recoJet_->etCorr[jet];}
       }
-      // Makeshift ENUms
+      
+      
+        if(l1extra_->ht > 50.  ){RecoHTL150->Fill(flyHT,wgt);}
+        if(l1extra_->ht > 75.  ){RecoHTL175->Fill(flyHT,wgt);}
+        if(l1extra_->ht > 100. ){RecoHTL1100->Fill(flyHT,wgt);}
+        if(l1extra_->ht > 125. ){RecoHTL1125->Fill(flyHT,wgt);}
+        if(l1extra_->ht > 150. ){RecoHTL1150->Fill(flyHT,wgt);}
+        if(l1extra_->ht > 175. ){RecoHTL1175->Fill(flyHT,wgt);}
+
+        
+        
+        
         int leadJet = leadingOfflineJet();
         bool match = MatchJet(leadJet);
         // bool matchEmu = MatchEmuJet(leadJet);        
