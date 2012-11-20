@@ -183,7 +183,7 @@ void L1JetAnalysis::BookHistos() {
         if(fabs(recoJet_->eta[jet]) < 3. && recoJet_->etCorr[jet] > 40.) {flyHT += recoJet_->etCorr[jet];}
       }
       
-      
+        RecoHT->Fill(flyHT,wgt);
         if(l1extra_->ht > 50.  ){RecoHTL150->Fill(flyHT,wgt);}
         if(l1extra_->ht > 75.  ){RecoHTL175->Fill(flyHT,wgt);}
         if(l1extra_->ht > 100. ){RecoHTL1100->Fill(flyHT,wgt);}
