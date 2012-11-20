@@ -184,17 +184,17 @@ void L1JetAnalysis::BookHistos() {
       // Makeshift ENUms
         int leadJet = leadingOfflineJet();
         bool match = MatchJet(leadJet);
-        bool matchEmu = MatchEmuJet(leadJet);        
+        // bool matchEmu = MatchEmuJet(leadJet);        
         // recoJetCorrelation->Fill(recoJet_->et[0],recoJet_->etCorr[leadJet],wgt);      
         // if(l1extra_->cenJetEt.size() > 0 && l1emuextra_->cenJetEt.size() > 0){  L1CorVsUnCor->Fill(l1extra_->cenJetEt[0],l1emuextra_->cenJetEt[0]);}
         std::pair <int,int> MatchedJet = ReturnMatchedJet(leadJet);
-        std::pair <int,int> MatchedEmuJet = ReturnMatchedEmuJet(leadJet);
+        // std::pair <int,int> MatchedEmuJet = ReturnMatchedEmuJet(leadJet);
         // Try to match a L1 Jet to the zeroth reco Jet, return the l1 type and l1 index of
         if(recoJet_->etCorr[leadJet] < RecoJetThreshold ) continue;
         if(fabs(recoJet_->eta[leadJet]) > 3.) continue;
         if(!LooseID(leadJet) ) continue;
         if(match&& (ReturnMatchedQuantity(MatchedJet,Et) < 250.))    RefJets->Fill(recoJet_->etCorr[leadJet],wgt);
-        if(matchEmu& (ReturnMatchedEmuQuantity(MatchedEmuJet,Et) < 250.)) EmuRef->Fill(recoJet_->etCorr[leadJet],wgt);
+        // if(matchEmu& (ReturnMatchedEmuQuantity(MatchedEmuJet,Et) < 250.)) EmuRef->Fill(recoJet_->etCorr[leadJet],wgt);
         // Ask for Corrected L1 Jets -- Use on 2011 Data
       if(match && (ReturnMatchedQuantity(MatchedJet,Et) < 250.)){
           if( ReturnMatchedQuantity(MatchedJet,Et) > 16.) {L1Jet16->Fill( recoJet_->etCorr[leadJet],wgt);} 
@@ -207,16 +207,16 @@ void L1JetAnalysis::BookHistos() {
           recoJetCorrelation->Fill(recoJet_->etCorr[leadJet],ReturnMatchedQuantity(MatchedJet,Et),wgt);
       }
 
-       if(matchEmu && (ReturnMatchedEmuQuantity(MatchedEmuJet,Et) < 250.)){
-          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 16.) {L1_EmulatedJet16->Fill( recoJet_->etCorr[leadJet],wgt);} 
-          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 20.) {L1_EmulatedJet20->Fill( recoJet_->etCorr[leadJet],wgt);}
-          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 36.) {L1_EmulatedJet36->Fill( recoJet_->etCorr[leadJet],wgt);}
-          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 52.) {L1_EmulatedJet52->Fill( recoJet_->etCorr[leadJet],wgt);}
-          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 68.) {L1_EmulatedJet68->Fill( recoJet_->etCorr[leadJet],wgt);}
-          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 92.) {L1_EmulatedJet92->Fill( recoJet_->etCorr[leadJet],wgt);}
-          if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 128.){L1_EmulatedJet128->Fill(recoJet_->etCorr[leadJet],wgt);}
-          recoJetCorrelationEmu->Fill(recoJet_->etCorr[leadJet],ReturnMatchedEmuQuantity(MatchedEmuJet,Et),wgt);
-        }
+       // if(matchEmu && (ReturnMatchedEmuQuantity(MatchedEmuJet,Et) < 250.)){
+       //    if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 16.) {L1_EmulatedJet16->Fill( recoJet_->etCorr[leadJet],wgt);} 
+       //    if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 20.) {L1_EmulatedJet20->Fill( recoJet_->etCorr[leadJet],wgt);}
+       //    if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 36.) {L1_EmulatedJet36->Fill( recoJet_->etCorr[leadJet],wgt);}
+       //    if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 52.) {L1_EmulatedJet52->Fill( recoJet_->etCorr[leadJet],wgt);}
+       //    if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 68.) {L1_EmulatedJet68->Fill( recoJet_->etCorr[leadJet],wgt);}
+       //    if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 92.) {L1_EmulatedJet92->Fill( recoJet_->etCorr[leadJet],wgt);}
+       //    if( ReturnMatchedEmuQuantity(MatchedEmuJet,Et) > 128.){L1_EmulatedJet128->Fill(recoJet_->etCorr[leadJet],wgt);}
+       //    recoJetCorrelationEmu->Fill(recoJet_->etCorr[leadJet],ReturnMatchedEmuQuantity(MatchedEmuJet,Et),wgt);
+       //  }
 
     // Timing studies
         for(size_t bx = 0; bx < 5; ++bx)
