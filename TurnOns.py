@@ -18,12 +18,12 @@ turnOns = {
   # "MHTReference":["MHT30Pass","MHT50Pass"],
   # "SumEtReference":["SumEt60","SumEt100"],
 # Special set so that we dont need to have a different loop for drawing 2d histos as well as other 1d distros
-  "NoRatio":["L1CorVsUnCor",],
+  "NoRatio":["L1CorVsUnCor","RecoJetvsL1Jet","RecoJetvsL1JetEmu"],
 
 }
 
 
-files = ["./ZeroBias",]
+files = ["./JetAll",]
 #fname = "./SingleMu.root"
 def main():
   for fname in files:
@@ -155,13 +155,25 @@ def main():
         c1.Print()
       else:
         for hist in triggerL:
+          xAxisTitle=None
+          yAxisTitle=None
+          
+          if "RecoJetvsL1Jet" in hist:
+              xAxisTitle = "Offline Jet E_{T} (GeV)"
+              yAxisTitle = "L1 Jet E_{T} (GeV)"
+              
           c1.canvas.SetLogy(False)
           hist = f.Get(hist)
+          hist.Scale(100./hist.Integral())
           # hist.SetTitle("")
-          
+          if xAxisTitle is None:xAxisTitle=hist.GetXaxis().GetTitle()
+          if yAxisTitle is None:yAxisTitle=hist.GetYaxis().GetTitle()
           if isinstance(hist,r.TH2F):
-            hist.GetXaxis().SetRangeUser(0.,300.)
-            hist.GetYaxis().SetRangeUser(0.,300.)
+            hist.GetXaxis().SetRangeUser(0.,254.)
+            hist.GetYaxis().SetRangeUser(0.,254.)
+            hist.GetXaxis().SetTitle(xAxisTitle)
+            hist.GetYaxis().SetTitle(yAxisTitle)
+            hist.GetZaxis().SetTitle("A.U.")
             hist.Draw("COLZ")
             c1.Print()
 

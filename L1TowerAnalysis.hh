@@ -149,6 +149,7 @@ bool L1TowerAnalysis::MatchJet(int RecoJetIdx){
 
 bool L1TowerAnalysis::MatchemuJet(int RecoJetIdx){
   double minDeltaR = 999999.;
+  if(!myTreeEmuExtra) return false;
   for(unsigned int i = 0; i < l1emuextra_->nCenJets; i++){
     if( deltaR(recoJet_->eta[RecoJetIdx], recoJet_->phi[RecoJetIdx], l1emuextra_->cenJetEta[i], l1emuextra_->cenJetPhi[i]) < minDeltaR)
     {
@@ -225,7 +226,9 @@ std::pair<int,int> L1TowerAnalysis::ReturnMatchedJet(int RecoJetIdx){
 
 std::pair<int,int> L1TowerAnalysis::ReturnMatchedemuJet(int RecoJetIdx){
   double minDeltaR = 9999.;
+
   std::pair <int,int> matchedJet(-1,-1);
+    if(!myTreeEmuExtra) return matchedJet;
   //printf("Reco Jet %i is Et,EtCorr,Eta,Phi (%f ,%f, %f, %f) \n ", RecoJetIdx,recoJet_->et[RecoJetIdx],recoJet_->etCorr[RecoJetIdx] , recoJet_->eta[RecoJetIdx], recoJet_->phi[RecoJetIdx]);
   for(unsigned int i = 0; i < l1emuextra_->nCenJets; i++){
 
@@ -275,6 +278,7 @@ std::pair<int,int> L1TowerAnalysis::ReturnMatchedemuJet(int RecoJetIdx){
 
 
 double L1TowerAnalysis::ReturnMatchedQuantity( std::pair<int,int> matchJet,int Quantity){
+
   if(Quantity == 1){
     if(matchJet.first== 0){
       return l1extra_->cenJetEt[matchJet.second];
@@ -323,6 +327,7 @@ double L1TowerAnalysis::ReturnMatchedQuantity( std::pair<int,int> matchJet,int Q
   }
 
 double L1TowerAnalysis::ReturnMatchedemuQuantity( std::pair<int,int> matchJet,int Quantity){
+      if(!myTreeEmuExtra) return 0;
   if(Quantity == 1){
     if(matchJet.first== 0){
       return l1emuextra_->cenJetEt[matchJet.second];
